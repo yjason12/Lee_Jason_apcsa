@@ -12,22 +12,23 @@ import static java.lang.Math.*;
 
 public class Distance
 {
-	private int xOne,yOne,xTwo,yTwo;
+	private int xOne,yOne,xTwo,yTwo, caseNum;
 	private double distance;
 
 	//constructor
 	
 	public Distance(int x1, int y1, int x2, int y2)
 	{
-		xOne = x1;
-		yOne = y1;
-		xTwo = x2;
-		yTwo = y2;
+		setCoordinates(x1,y1,x2,y2);
+		
 	}
 
 	public void setCoordinates(int x1, int y1, int x2, int y2)
 	{
-		
+		xOne = x1;
+		yOne = y1;
+		xTwo = x2;
+		yTwo = y2;
 	}
 
 	public void calcDistance()
@@ -42,13 +43,13 @@ public class Distance
 	
 	public void print()
 	{
-		System.out.printf("Distance == ", getDistance());
+		System.out.printf("Distance == " + getDistance());
 	}
 	
 	//complete print or the toString
 
 	public String toString()
 	{
-		return "";
+		return ""; 
 	}
 }

@@ -29,7 +29,7 @@ public class MPHRunner
 		test.calcMPH();
 		test.print();
 		
-		//add more test cases
+		
 		
 		
 	}

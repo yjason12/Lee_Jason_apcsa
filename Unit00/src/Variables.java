@@ -52,6 +52,8 @@ public class Variables
 		System.out.println("boolone = " + boolOne );
 		System.out.println("stringOne = "+ stringOne);
 
+		double var = 9.2367;
+		System.out.printf("%9.3fyourmom",var);
 
 
 

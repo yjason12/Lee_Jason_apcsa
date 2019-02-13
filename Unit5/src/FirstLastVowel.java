@@ -13,6 +13,9 @@ public class FirstLastVowel
 	   if (start.startsWith("a") || start.startsWith("e") || start.startsWith("i") || start.startsWith("u") || start.startsWith("o")) {
 		   return "yes";
 	   }
+	   if (start.endsWith("a")||start.endsWith("e") || start.endsWith("i")|| start.endsWith("o")|| start.endsWith("u")) {
+		   return "yes";
+	   }
 	   return "no";
 	}
    

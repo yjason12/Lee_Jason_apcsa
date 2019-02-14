@@ -20,7 +20,6 @@ public class WordsCompareRunner
 	   String inp2 = keyboard.nextLine();
 	   
 	   WordsCompare testCase = new WordsCompare(inp1,inp2);
-	   testCase.compare();
 	   System.out.println(testCase);
 	}
 }

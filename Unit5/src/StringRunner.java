@@ -20,7 +20,6 @@ public class StringRunner
 		String inp = keyboard.nextLine();
 		StringOddOrEven testCase = new StringOddOrEven(inp);
 		
-		testCase.isEven();
 		System.out.println(testCase);
 	}
 }

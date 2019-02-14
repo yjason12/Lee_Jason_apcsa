@@ -22,7 +22,7 @@ public class StringEqualityRunner
 		
 		StringEquality testCase = new StringEquality(inp1,inp2);
 		
-		testCase.checkEquality();
+		
 		
 		System.out.println(testCase);
 	}

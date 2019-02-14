@@ -32,17 +32,15 @@ public class StringEquality
 	{
 		if (wordOne.contentEquals(wordTwo)) {
 			return true;
-		}
+		} 
 		return false;
 	}
 
 	public String toString()
 	{
 		if (checkEquality() == false) {
-			
-		
-		return wordOne + " does not have the same letters as " + wordTwo + "\n";
+			return wordOne + " does not have the same letters as " + wordTwo + "\n";
 		}
-	return wordOne + " has the same letters as " + wordTwo + "\n";
+		return wordOne + " has the same letters as " + wordTwo + "\n";
 	}
 }

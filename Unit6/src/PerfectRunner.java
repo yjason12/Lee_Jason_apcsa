@@ -9,6 +9,8 @@ public class PerfectRunner
 	public static void main( String args[] )
 	{
 		//add test cases
-																
+						
+		Perfect testCase1 = new Perfect(6);
+		System.out.println(testCase1);
 	}
 }

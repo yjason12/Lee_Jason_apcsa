@@ -28,12 +28,22 @@ public class BiggestDouble
 
 	public double getBiggest()
 	{
-		if ()
-		return 0.0;
+		if ((one>two)&& (one>three) && (one>four)) {
+			return one;
+		}
+		if ((two>one)&& (two>three) && (two>four)) {
+			return two;
+		}
+		if ((three> one) && (three>two) && (three>four)){
+			return three;
+		}
+		return four;
+		
 	}
 
 	public String toString()
 	{
-	   return "";
+		String total = Double.toString(getBiggest());
+	   return total;
 	}
 }

@@ -8,5 +8,11 @@ public class TriplesRunner
 {
    public static void main(String args[])
    {
-	}
+	   int num = 110;
+	   
+	   Triples run = new Triples(num);
+	   
+	   out.println(run);
+	   
+   }
 }

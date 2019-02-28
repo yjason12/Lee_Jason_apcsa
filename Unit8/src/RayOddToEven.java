@@ -26,7 +26,7 @@ public class RayOddToEven
 		int evenNum =0;
 		int evenNumInterv = 0;
 		for(int i = ray.length-1; i >=0; i--) {
-			if(ray[i]%2 == 1) {
+			if(ray[i]%2 == 1|| ray[i]%2 ==-1) {
 				firstOdd = ray[i];
 				firstOddInterval = i;
 			}

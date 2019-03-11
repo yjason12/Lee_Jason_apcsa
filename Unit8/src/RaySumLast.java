@@ -7,9 +7,10 @@ public class RaySumLast
 {
 	public static int go(int[] ray)
 	{
+		int start = ray[0];
 		int total = 0;
 		for(int val: ray) {
-			if (val >ray[ray.length-1]) {
+			if (val > start) {
 				total += val;
 			}
 		}

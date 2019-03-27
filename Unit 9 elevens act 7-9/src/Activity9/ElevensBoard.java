@@ -1,5 +1,4 @@
 package Activity9;
-
 import java.util.List;
 import java.util.ArrayList;
 
@@ -53,93 +52,105 @@ public class ElevensBoard extends Board {
 	 * @return true if the selected cards form a valid group for removal;
 	 *         false otherwise.
 	 */
-	@Override
-	public boolean isLegal(List<Integer> selectedCards) {
-		if(containsPairSum11(selectedCards) || containsJQK(selectedCards)) {
+	public boolean isLegal(List<Integer> selectedCards) 
+	{
+		/*if (selectedCards.size() == 2)
+		{
+			return containsPairSum11(selectedCards);
+		}
+		else if (selectedCards.size() == 3)
+		{
+			return containsJQK(selectedCards);
+		}
+		return false;*/
+		
+		
+		if (selectedCards.size()==2)
+			return containsPairSum11(selectedCards);
+		else if (selectedCards.size()==3)
+			return containsJQK(selectedCards);
+		return false;
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+
+	public boolean anotherPlayIsPossible() 
+	{
+		List<Integer> index = cardIndexes();
+		if (containsPairSum11(index) || containsJQK(index))
+		{
 			return true;
 		}
-		else {
+		return false;
+	}
+
+	private boolean containsPairSum11(List<Integer> selectedCards)
+	{
+		if (selectedCards.size() < 2)
+		{
 			return false;
 		}
-	}
-
-	/**
-	 * Determine if there are any legal plays left on the board.
-	 * In Elevens, there is a legal play if the board contains
-	 * (1) a pair of non-face cards whose values add to 11, or (2) a group
-	 * of three cards consisting of a jack, a queen, and a king in some order.
-	 * @return true if there is a legal play left on the board;
-	 *         false otherwise.
-	 */
-	@Override
-	public boolean anotherPlayIsPossible() {
 		
-		boolean legal = false;
-		List<Integer> selected = new ArrayList<Integer>();
-		
-		for (int card1 = 0; card1 < BOARD_SIZE; card1++)
+		for (int i = 0; i < selectedCards.size(); i++)
 		{
-			selected.add(card1);
-			for (int card2 = card1 + 1; card2 < BOARD_SIZE; card2++)
+			for (int j = i+1; j < selectedCards.size(); j++)
 			{
-				selected.add(card2);
-				legal = (containsPairSum11(selected));
-				if (legal) break;
-				selected.remove(1);
-				
-			}
-			if (legal) break;
-			for (int card2 = card1 + 1; card2 < BOARD_SIZE; card2++)
-			{
-				selected.add(card2);
-				for (int card3 = card2 + 1; card3 < BOARD_SIZE; card3++)
+				if (((cardAt(selectedCards.get(i)).pointValue()) + cardAt(selectedCards.get(j)).pointValue()) == 11)
 				{
-					selected.add(card3);
-					legal = (containsJQK(selected));
-					if (legal) break;
-					selected.remove(2);
-					
+					return true;
 				}
-				if (legal) break;
-				selected.remove(1);
-		
 			}
-			if (legal) break;
-			selected.remove(0);
+
 		}
-		return legal;
+		return false;
 	}
 
-	/**
-	 * Check for an 11-pair in the selected cards.
-	 * @param selectedCards selects a subset of this board.  It is list
-	 *                      of indexes into this board that are searched
-	 *                      to find an 11-pair.
-	 * @return true if the board entries in selectedCards
-	 *              contain an 11-pair; false otherwise.
-	 */
-	private boolean containsPairSum11(List<Integer> selectedCards) {
+	private boolean containsJQK(List<Integer> selectedCards)
+	{
+		if (selectedCards.size() < 3)
+		{
+			return false;
+		}
 		
-		return (selectedCards.size() == 2 && cardAt(selectedCards.get(0)).pointValue() + cardAt(selectedCards.get(1)).pointValue() == 11);
-	}
-
-	/**
-	 * Check for a JQK in the selected cards.
-	 * @param selectedCards selects a subset of this board.  It is list
-	 *                      of indexes into this board that are searched
-	 *                      to find a JQK group.
-	 * @return true if the board entries in selectedCards
-	 *              include a jack, a queen, and a king; false otherwise.
-	 */
-	private boolean containsJQK(List<Integer> selectedCards) {
-		Card card1 = cardAt(selectedCards.get(0));
-		Card card2 = cardAt(selectedCards.get(1));
-		Card card3 = cardAt(selectedCards.get(2));
+		boolean jack,queen,king;
+		jack=queen=king=false;
 		
-		boolean correctSize = (selectedCards.size() == 3);
-		boolean allFace = (card1.pointValue() + card2.pointValue() + card3.pointValue() == 0);
-		boolean isJQK = (!card1.rank().equals(card2.rank())) && !(card1.rank().equals(card3.rank())) && !(card2.rank().equals(card3.rank()));
+		for (int i = 0; i < selectedCards.size(); i++)
+		{
+			if (cardAt(selectedCards.get(i)).rank() == "jack")
+			{
+				jack = true;
+			}
+			
+			if (cardAt(selectedCards.get(i)).rank() == "queen")
+			{
+				queen = true;
+			}
+			
+			if (cardAt(selectedCards.get(i)).rank() == "king")
+			{
+				king = true;
+			}
+		}
 		
-		return (correctSize && allFace && isJQK);
+		return king && jack && queen;
 	}
 }

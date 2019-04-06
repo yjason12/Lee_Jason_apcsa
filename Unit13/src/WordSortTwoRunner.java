@@ -12,18 +12,15 @@ public class WordSortTwoRunner
 {
 	public static void main( String args[] ) throws IOException
 	{
-		Scanner file = new Scanner(new File("C:\\Users\\0yong\\Desktop\\CSA\\Unit Packets\\unit13\\Unit13-Assignments\\wordsorttwo.dat"));	
+		Scanner file = new Scanner(new File("src//wordsorttwo.dat"));
 		int size = file.nextInt();
 		file.nextLine();
 		for(int i = 0; i<size; i++)
 		{
 			String sentence = file.nextLine();
-			//instantiate a new WordSort
-			WordSortTwo a = new WordSortTwo(sentence);
-			a.sort();
-			System.out.println(a.toString());
+			WordSortTwo run = new WordSortTwo(sentence);
+			run.sort();
+			System.out.println(run);
 		}
 	}
 }
-
-

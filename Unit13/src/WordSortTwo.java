@@ -13,23 +13,27 @@ public class WordSortTwo
 
 	public void sort()
 	{
-		for(int i = 0; i < wordRay.length - 1; i++) {
-			for(int j = i; j < wordRay.length; j++) {
-				if(wordRay[i].compareTo(wordRay[j]) > 0) {
-					String temp = wordRay[i];
-					wordRay[i] = wordRay[j];
-					wordRay[j] = temp;
-				}
+		for (int i = 1; i < wordRay.length; i++)
+		{
+			String temp = wordRay[i];
+			int compare = i;
+			while (compare > 0 && wordRay[compare - 1].compareTo(temp) > 0)
+			{
+				wordRay[compare] = wordRay[compare - 1];
+				compare--;
 			}
+			wordRay[compare] = temp;
 		}
 	}
 
 	public String toString()
 	{
-		String output="";
-		for(String item: wordRay) {
-			output += item + "\n";
+		String output = "";
+		
+		for (String word: wordRay)
+		{
+			output = output + word + "\n";
 		}
-		return output+"\n\n";
+		return output + "\n\n";
 	}
 }

@@ -6,27 +6,38 @@ import static java.lang.System.*;
 
 public class NumberSorter
 {
-	//instance variables and other methods not shown
-
+	
 	private static int getNumDigits(int number)
 	{
 		int count = 0;
-		while(number > 0) {
+		while (Math.pow(10, count) < number)
+		{
 			count++;
-			number = number/10;
 		}
-		return count;
+		return (int) count;
 	}
 
 	public static int[] getSortedDigitArray(int number)
 	{
-		int size = getNumDigits(number);
-		int[] sorted = new int[size];
-		for(int i = 0; i < size; i++) {
-			sorted[i] = number%10;
-			number = number/10;
+		int length = getNumDigits(number);
+		int[] sorted = new int[length];
+		
+		for (int i = 0; i < length; i++)
+		{
+			sorted[i] = (number / (int) Math.pow(10, i) % 10);
 		}
-		Arrays.sort(sorted);
+		for (int i = 1; i < length; i++)
+		{
+			int temp = sorted[i];
+			int check = i;
+			
+			while (check > 0 && sorted[check - 1] > temp)
+			{
+				sorted[check] = sorted[check - 1];
+				check--;
+			}
+			sorted[check] = temp;
+		}
 		return sorted;
 	}
 }

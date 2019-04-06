@@ -8,7 +8,9 @@ public class NumberShifterRunner
 {
 	public static void main( String args[] ) throws IOException
 	{
-		int[] ray = NumberShifter.makeLucky7Array(8);
-		System.out.println(Arrays.toString(ray));
+		int[] test = NumberShifter.makeLucky7Array(7);
+		System.out.println(Arrays.toString(test));
+		NumberShifter.shiftEm(test);
+		System.out.println(Arrays.toString(test));
 	}
 }

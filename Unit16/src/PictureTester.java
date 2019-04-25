@@ -118,9 +118,10 @@ public class PictureTester
   }
   public static void testCopy() {
 	  Picture flower = new Picture("C:\\Users\\0yong\\Documents\\GitHub\\Lee_Jason_apcsa-p33\\Unit16\\src\\images\\flower1.jpg");
-      flower.explore();
-      flower.copy(flower, 0, 150, 0, 150);
-      flower.explore();
+      Picture canvas = new Picture("C:\\Users\\0yong\\Documents\\GitHub\\Lee_Jason_apcsa-p33\\Unit16\\src\\images\\640x480.jpg");
+	  flower.explore();
+      canvas.copyPartial(flower, 0, 0, 50, 50,100,100);
+      canvas.explore();
   }
   public static void testMyCollage() {
 	  	Picture canvas = new Picture("C:\\Users\\0yong\\Documents\\GitHub\\Lee_Jason_apcsa-p33\\Unit16\\src\\images\\640x480.jpg");
@@ -157,10 +158,10 @@ public class PictureTester
     //testMirrorArms();
     //testMirrorGull();
     //testMirrorDiagonal();
-    //testCollage();
+   // testCollage();
 	 //testCopy();
-   // testMyCollage();
-	  testEdgeDetection();
+   testMyCollage();
+	  //testEdgeDetection();
     
     
     

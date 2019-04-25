@@ -272,44 +272,51 @@ public class Picture extends SimplePicture
       }
     }   
   }
-  public void copy(Picture fromPic, int startRow, int endRow, int startCol, int endCol)
-  {
-    Pixel fromPixel = null;
-    Pixel toPixel = null;
-    Pixel[][] toPixels = this.getPixels2D();
-    Pixel[][] fromPixels = fromPic.getPixels2D();
-    for (int fromRow = 0, toRow = startRow; 
-         fromRow < fromPixels.length &&
-         toRow < endRow;
-         fromRow++, toRow++)
-    {
-      for (int fromCol = 0, toCol = startCol; 
-           fromCol < fromPixels[0].length &&
-           toCol < endCol;  
-           fromCol++, toCol++)
-      {
-        fromPixel = fromPixels[fromRow][fromCol];
-        toPixel = toPixels[toRow][toCol];
-        toPixel.setColor(fromPixel.getColor());
-        //System.out.println("Fromrow " + fromRow + " toRow " + toRow + " fromCol" + fromCol + " toCol " + toCol);
-        //System.out.println(fromPixels[0].length);
-      }
-    } 
-  }
+  public void copyPartial(Picture fromPic, int startRow, int startCol,
+			int fromRowStart, int fromColStart, int fromRowEnd, int fromColEnd)
+	{
+		Pixel fromPixel = null;
+		Pixel toPixel = null;
+		Pixel[][] toPixels = this.getPixels2D();
+		Pixel[][] fromPixels = fromPic.getPixels2D();
+		if (fromRowStart < 0 || fromRowStart > fromPixels.length) {
+			fromRowStart = 0;
+		}
+		if (fromColStart < 0 || fromColStart > fromPixels[0].length) {
+			fromColStart = 0;
+		}
+		if (fromRowEnd < 0 || fromRowEnd > fromPixels.length) {
+			fromRowEnd = fromPixels.length;
+		}
+		if (fromColEnd < 0 || fromColEnd > fromPixels[0].length) {
+			fromColEnd = fromPixels[0].length;
+		}
+		for (int fromRow = fromRowStart, toRow = startRow; fromRow < fromRowEnd
+				&& toRow < toPixels.length; fromRow++, toRow++)
+		{
+			for (int fromCol = fromColStart, toCol = startCol; fromCol < fromColEnd
+					&& toCol < toPixels[0].length; fromCol++, toCol++)
+			{
+				fromPixel = fromPixels[fromRow][fromCol];
+				toPixel = toPixels[toRow][toCol];
+				toPixel.setColor(fromPixel.getColor());
+			}
+		}
+	}
   /** Method to create a collage of several pictures */
   public void createCollage()
   {
     Picture flower1 = new Picture("C:\\Users\\0yong\\Documents\\GitHub\\Lee_Jason_apcsa-p33\\Unit16\\src\\images\\flower1.jpg");
     Picture flower2 = new Picture("C:\\Users\\0yong\\Documents\\GitHub\\Lee_Jason_apcsa-p33\\Unit16\\src\\images\\flower2.jpg");
     this.copy(flower1,0,0);
-    this.copy(flower2,100,0);
+   this.copy(flower2,100,0);
     this.copy(flower1,200,0);
-    Picture flowerNoBlue = new Picture(flower2);
-    flowerNoBlue.zeroBlue();
+   Picture flowerNoBlue = new Picture(flower2);
+  flowerNoBlue.zeroBlue();
     this.copy(flowerNoBlue,300,0);
     this.copy(flower1,400,0);
-    this.copy(flower2,500,0);
-    this.mirrorVertical();
+   this.copy(flower2,500,0);
+   this.mirrorVertical();
     this.write("C:\\Users\\0yong\\Documents\\GitHub\\Lee_Jason_apcsa-p33\\Unit16\\src\\images\\7inX95in.jpg");
   }
   

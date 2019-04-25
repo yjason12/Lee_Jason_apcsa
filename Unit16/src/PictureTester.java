@@ -83,7 +83,7 @@ public class PictureTester
 	  motorcycle.explore();
   }
   public static void testMirrorDiagonal() {
-	  Picture beach = new Picture("C:\\Users\\0yong\\Documents\\GitHub\\Lee_Jason_apcsa-p33\\Unit16\\src\\images\\water.jpg");
+	  Picture beach = new Picture("C:\\\\Users\\\\0yong\\\\Documents\\\\GitHub\\\\Lee_Jason_apcsa-p33\\\\Unit16\\\\src\\\\images\\\\beach.jpg");
 	  beach.explore();
 	  beach.mirrorDiagonal();
 	  beach.explore();
@@ -120,7 +120,7 @@ public class PictureTester
 	  Picture flower = new Picture("C:\\Users\\0yong\\Documents\\GitHub\\Lee_Jason_apcsa-p33\\Unit16\\src\\images\\flower1.jpg");
       Picture canvas = new Picture("C:\\Users\\0yong\\Documents\\GitHub\\Lee_Jason_apcsa-p33\\Unit16\\src\\images\\640x480.jpg");
 	  flower.explore();
-      canvas.copyPartial(flower, 0, 0, 50, 50,100,100);
+      canvas.copyPartial(flower, 50, 50, 0, 0,70,70);
       canvas.explore();
   }
   public static void testMyCollage() {
@@ -132,6 +132,7 @@ public class PictureTester
   public static void testEdgeDetection()
   {
     Picture swan = new Picture("C:\\Users\\0yong\\Documents\\GitHub\\Lee_Jason_apcsa-p33\\Unit16\\src\\images\\swan.jpg");
+    swan.explore();
     swan.edgeDetection(10);
     swan.explore();
   }
@@ -150,21 +151,26 @@ public class PictureTester
     //testNegate();
     //testGrayscale();
     //testFixUnderwater();
-    //testMirrorVertical();
+    testMirrorVertical();
 	//testMirrorVerticalRightToLeft();
-	//testMirrorHorizontal();
+	testMirrorHorizontal();
 	//testMirrorHorizontalBotToTop();
     //testMirrorTemple();
     //testMirrorArms();
     //testMirrorGull();
-    //testMirrorDiagonal();
-   // testCollage();
-	 //testCopy();
-   testMyCollage();
-	  //testEdgeDetection();
+	  
+    testMirrorDiagonal();
+  //testCollage();
+	// testCopy();
+ //testMyCollage();
+	//  testEdgeDetection();
     
     
     
+ 
+ 
+ 
+ 
     //testEdgeDetection2();
     //testChromakey();
     //testEncodeAndDecode();

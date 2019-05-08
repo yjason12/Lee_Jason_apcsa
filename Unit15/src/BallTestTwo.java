@@ -1,3 +1,4 @@
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -11,19 +12,17 @@ class BallTestTwo extends Canvas implements Runnable
 
 	public BallTestTwo()
 	{
-		setBackground(Color.white);
+		setBackground(Color.WHITE);
 		setVisible(true);
 
+		//instantiate a new Ball
+
+
 		//test the Ball thoroughly
-		//ball = new Ball();
 		
-		//uncomment each one test make sure Ball is perfect
-		ball = new Ball(50,50,3,3);   //test initialization constructor
-		ball = new Ball(100,350,10,10,Color.RED);   //test initialization constructor
-		ball = new Ball(200,90,10,10,Color.BLUE);   //test initialization constructor
-		ball = new Ball(300,10,10,10,Color.GREEN);   //test initialization constructor
 
 		//test all constructors
+
 
 		new Thread(this).start();
 	}
@@ -54,8 +53,7 @@ class BallTestTwo extends Canvas implements Runnable
    	{
    		while(true)
    		{
-   		   Thread.currentThread();
-   		   Thread.sleep(19);
+   		   Thread.currentThread().sleep(19);
             repaint();
          }
       }catch(Exception e)

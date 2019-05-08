@@ -1,4 +1,10 @@
+//Name -
+//Date -
+//Class -
+//Lab  -
+
 import java.awt.Color;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Canvas;
@@ -8,8 +14,8 @@ import java.awt.event.KeyEvent;
 import static java.lang.Character.*;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
-
-public class Pong extends Canvas implements KeyListener, Runnable
+import java.util.Random;
+public class PongExtensions extends Canvas implements KeyListener, Runnable
 {
 	private Ball ball;
 	private Paddle leftPaddle;
@@ -17,16 +23,19 @@ public class Pong extends Canvas implements KeyListener, Runnable
 	private boolean[] keys;
 	private BufferedImage back;
 	private int p1score, p2score;
+	private Wall leftwall, rightwall, topwall, botwall;
 
-
-	public Pong()
+	public PongExtensions()
 	{
 		//set up all variables related to the game
 		ball  = new Ball(500,200,10,10,Color.BLACK,-3,1);
 		ball.setSpeed(-1, 1);
 		leftPaddle = new Paddle(50, 100, 20, 50, Color.RED, 5);
 		rightPaddle = new Paddle(750, 100, 20, 50, Color.BLUE, 5);
-		
+		leftwall = new Wall(0,0,10,600,Color.RED);
+		rightwall = new Wall(770, 0, 10, 600 ,Color.RED);
+		topwall = new Wall(0,0,800,10,Color.RED);
+		botwall = new Wall(0,550,800,10,Color.RED);
 
 		keys = new boolean[4];
 
@@ -46,17 +55,25 @@ public class Pong extends Canvas implements KeyListener, Runnable
    {
 		//set up the double buffering to make the game animation nice and smooth
 		Graphics2D twoDGraph = (Graphics2D)window;
-
+		
 		//take a snap shop of the current screen and same it as an image
 		//that is the exact same width and height as the current screen
 		if(back==null)
 		   back = (BufferedImage)(createImage(getWidth(),getHeight()));
-
+		Random rng = new Random();
+		Color c = new Color(rng.nextInt(256),rng.nextInt(256),rng.nextInt(256));
+		rightwall.setColor(c);
+		leftwall.setColor(c);
+		topwall.setColor(c);
+		botwall.setColor(c);
 		//create a graphics reference to the back ground image
 		//we will draw all changes on the background image
 		Graphics graphToBack = back.createGraphics();
 		graphToBack.drawRect(0, 10,800 , 550);
-
+		leftwall.draw(graphToBack);
+		rightwall.draw(graphToBack);
+		topwall.draw(graphToBack);
+		botwall.draw(graphToBack);
 		ball.moveAndDraw(graphToBack);
 		leftPaddle.draw(graphToBack);
 		rightPaddle.draw(graphToBack);
@@ -64,7 +81,7 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		graphToBack.drawString("Player 2: " + p2score, 500, 100);
 
 		//see if ball hits left wall or right wall
-		if(!(ball.getX()>=10 && ball.getX()<=790))
+	/*	if(!(ball.getX()>=10 && ball.getX()<=790))
 		{
 			ball.setXSpeed(0);
 			ball.setYSpeed(0);
@@ -85,14 +102,37 @@ public class Pong extends Canvas implements KeyListener, Runnable
 			ball.draw(graphToBack,Color.white);
 			ball  = new Ball(500,200,10,10,Color.BLACK,-3,1);
 		}
-
-		
+*/
+		if(ball.didCollideLeft(leftwall)){
+			ball.setXSpeed(0);
+			ball.setYSpeed(0);
+			graphToBack.setColor(Color.WHITE);
+			graphToBack.drawString("Player 2: "+p2score, 500, 100);
+			p2score++;
+			graphToBack.setColor(Color.BLACK);
+			graphToBack.drawString("Player 2: "+p2score,500,100);
+			ball.draw(graphToBack,Color.WHITE);
+			ball = new Ball(500,200,10,10,Color.BLACK,-1,1);
+			
+		}
+		if(ball.didCollideRight(rightwall)){
+			ball.setXSpeed(0);
+			ball.setYSpeed(0);
+			graphToBack.setColor(Color.WHITE);
+			graphToBack.drawString("Player 1: "+p1score,200,100);
+			p1score++;
+			graphToBack.setColor(Color.BLACK);
+			graphToBack.drawString("Player 1: "+p1score, 200, 100);
+			ball.draw(graphToBack,Color.WHITE);
+			ball = new Ball(500,200,10,10,Color.BLACK,-1,1);
+		}
 		//see if the ball hits the top or bottom wall 
 		
-		if(!(ball.getY()>=10&&ball.getY()<=550)){
+		/*if(!(ball.getY()>=10&&ball.getY()<=550)){
 			ball.setYSpeed(-1*ball.getYSpeed());
 		}
-
+		*/
+		if(ball.didCollideBottom(botwall)||ball.didCollideTop(topwall)) ball.setYSpeed(-1*ball.getYSpeed());
 
 		//see if the ball hits the left paddle
 		/*if(ball.getX()<=leftPaddle.getX()+leftPaddle.getWidth()+Math.abs(ball.getXSpeed())&& 

@@ -1,3 +1,9 @@
+//© A+ Computer Science  -  www.apluscompsci.com
+//Name -
+//Date -
+//Class -
+//Lab  -
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -8,26 +14,32 @@ import java.awt.event.KeyEvent;
 import static java.lang.Character.*;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
-
-public class Pong extends Canvas implements KeyListener, Runnable
+import java.lang.Math;
+public class Breakout extends Canvas implements KeyListener, Runnable
 {
 	private Ball ball;
-	private Paddle leftPaddle;
 	private Paddle rightPaddle;
 	private boolean[] keys;
 	private BufferedImage back;
-	private int p1score, p2score;
+	private int playerscore;
+	private Block[][] bricks;
+	private boolean[][] visible;
 
-
-	public Pong()
+	public Breakout()
 	{
 		//set up all variables related to the game
+		System.out.println("NAME: ANDREW ZHANG\nPERIOD: 4\nDATE:4/4/2018\nCOMPUTER NUMBER:18\n");
 		ball  = new Ball(500,200,10,10,Color.BLACK,-3,1);
 		ball.setSpeed(-1, 1);
-		leftPaddle = new Paddle(50, 100, 20, 50, Color.RED, 5);
 		rightPaddle = new Paddle(750, 100, 20, 50, Color.BLUE, 5);
-		
-
+		bricks = new Block[5][4];
+		visible = new boolean[5][4];
+		for(int i=0;i<5;i++){
+			for(int j=0;j<4;j++){
+				bricks[i][j]=new Block(20+50*j,20+115*i,10,75,Color.BLACK);
+				visible[i][j]=true;
+			}
+		}
 		keys = new boolean[4];
 
     
@@ -56,34 +68,39 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		//we will draw all changes on the background image
 		Graphics graphToBack = back.createGraphics();
 		graphToBack.drawRect(0, 10,800 , 550);
-
+		
 		ball.moveAndDraw(graphToBack);
-		leftPaddle.draw(graphToBack);
+		for(int i=0;i<5;i++){
+			for(int j=0;j<4;j++){
+				if(visible[i][j]){
+					bricks[i][j].draw(graphToBack);
+				}
+			}
+		}
 		rightPaddle.draw(graphToBack);
-		graphToBack.drawString("Player 1: "+p1score, 200, 100);
-		graphToBack.drawString("Player 2: " + p2score, 500, 100);
-
+		graphToBack.drawString("Score: "+playerscore, 400, 100);
 		//see if ball hits left wall or right wall
-		if(!(ball.getX()>=10 && ball.getX()<=790))
+		if( ball.getX()>790)
 		{
 			ball.setXSpeed(0);
 			ball.setYSpeed(0);
 			if(ball.getX()>790){
 				graphToBack.setColor(Color.WHITE);
-				graphToBack.drawString("Player 1: "+p1score,200,100);
-				p1score++;
+				graphToBack.drawString("Score: "+playerscore, 400, 100);
+				playerscore =0;
 				graphToBack.setColor(Color.BLACK);
-				graphToBack.drawString("Player 1: "+p1score, 200, 100);
-			}
-			else if(ball.getX()<10){
-				graphToBack.setColor(Color.WHITE);
-				graphToBack.drawString("Player 2: "+p2score,500,100);
-				p2score++;
-				graphToBack.setColor(Color.BLACK);
-				graphToBack.drawString("Player 2: "+p2score, 500, 100);
+				graphToBack.drawString("Score: "+playerscore, 400, 100);
+				for(int i=0;i<5;i++){
+					for(int j=0;j<4;j++){
+						visible[i][j]=true;
+					}
+				}
 			}
 			ball.draw(graphToBack,Color.white);
 			ball  = new Ball(500,200,10,10,Color.BLACK,-3,1);
+		}
+		if(ball.getX()<10){
+			ball.setXSpeed(-ball.getXSpeed());
 		}
 
 		
@@ -92,8 +109,32 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		if(!(ball.getY()>=10&&ball.getY()<=550)){
 			ball.setYSpeed(-1*ball.getYSpeed());
 		}
-
-
+		if(ball.didCollideRight(rightPaddle)||ball.didCollideLeft(rightPaddle)) ball.setXSpeed(-ball.getXSpeed());
+		else if(ball.didCollideTop(rightPaddle)||ball.didCollideBottom(rightPaddle)) ball.setYSpeed(-ball.getYSpeed());
+		for(int i=0;i<5;i++){
+			for(int j=0;j<4;j++){
+				if(visible[i][j]&&(ball.didCollideBottom(bricks[i][j])||ball.didCollideTop(bricks[i][j]))){
+					ball.setYSpeed(-ball.getYSpeed());
+					visible[i][j]=false;
+					bricks[i][j].draw(graphToBack, Color.WHITE);
+					graphToBack.setColor(Color.WHITE);
+					graphToBack.drawString("Score: "+playerscore, 400, 100);
+					playerscore++;
+					graphToBack.setColor(Color.BLACK);
+					graphToBack.drawString("Score: "+playerscore, 400, 100);
+				}
+				else if(visible[i][j]&&(ball.didCollideLeft(bricks[i][j])||ball.didCollideRight(bricks[i][j]))){
+					ball.setXSpeed(-ball.getXSpeed());
+					visible[i][j] = false;
+					bricks[i][j].draw(graphToBack, Color.WHITE);
+					graphToBack.setColor(Color.WHITE);
+					graphToBack.drawString("Score: "+playerscore, 400, 100);
+					playerscore++;
+					graphToBack.setColor(Color.BLACK);
+					graphToBack.drawString("Score: "+playerscore, 400, 100);
+				}
+			}
+		}
 		//see if the ball hits the left paddle
 		/*if(ball.getX()<=leftPaddle.getX()+leftPaddle.getWidth()+Math.abs(ball.getXSpeed())&& 
 				(ball.getY()>=leftPaddle.getY()&& 
@@ -123,7 +164,7 @@ public class Pong extends Canvas implements KeyListener, Runnable
 			}
 		}
 */
-		
+/*		
 		if (ball.didCollideLeft(leftPaddle)|| ball.didCollideRight(rightPaddle)){
 			ball.setXSpeed(-ball.getXSpeed());}
 		else if (ball.didCollideTop(leftPaddle) || ball.didCollideTop(rightPaddle)
@@ -131,11 +172,9 @@ public class Pong extends Canvas implements KeyListener, Runnable
 			//ball.setXSpeed(-ball.getXSpeed());
 			ball.setYSpeed(-ball.getYSpeed());
 		}
-
+*/
 
 		//see if the paddles need to be moved
-		if(keys[0]) leftPaddle.moveUpAndDraw(graphToBack);
-		if(keys[1]) leftPaddle.moveDownAndDraw(graphToBack);
 		if(keys[2]) rightPaddle.moveUpAndDraw(graphToBack);
 		if(keys[3]) rightPaddle.moveDownAndDraw(graphToBack);
 

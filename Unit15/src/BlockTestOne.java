@@ -1,4 +1,3 @@
-
 import static java.lang.System.*;
 import java.awt.Color;
 
@@ -20,7 +19,5 @@ class BlockTestOne
 		
 		out.println(one.equals(two));
 		out.println(one.equals(one));		
-		
-		BlockTestTwo test = new BlockTestTwo();
 	}
 }

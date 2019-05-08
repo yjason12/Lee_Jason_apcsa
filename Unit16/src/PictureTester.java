@@ -123,6 +123,7 @@ public class PictureTester
       canvas.copyPartial(flower, 50, 50, 0, 0,70,70);
       canvas.explore();
   }
+
   public static void testMyCollage() {
 	  	Picture canvas = new Picture("C:\\Users\\0yong\\Documents\\GitHub\\Lee_Jason_apcsa-p33\\Unit16\\src\\images\\640x480.jpg");
 	    canvas.myCollage();
@@ -136,6 +137,7 @@ public class PictureTester
     swan.edgeDetection(10);
     swan.explore();
   }
+  
   
   /** Main method for testing.  Every class can have a main
     * method in Java */
@@ -151,15 +153,15 @@ public class PictureTester
     //testNegate();
     //testGrayscale();
     //testFixUnderwater();
-    testMirrorVertical();
+   // testMirrorVertical();
 	//testMirrorVerticalRightToLeft();
-	testMirrorHorizontal();
+	//testMirrorHorizontal();
 	//testMirrorHorizontalBotToTop();
     //testMirrorTemple();
     //testMirrorArms();
     //testMirrorGull();
-	  
-    testMirrorDiagonal();
+	// 
+    //testMirrorDiagonal();
   //testCollage();
 	// testCopy();
  //testMyCollage();

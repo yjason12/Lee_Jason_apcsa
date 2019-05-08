@@ -272,6 +272,48 @@ public class Picture extends SimplePicture
       }
     }   
   }
+  public void blur(int x, int y, int w, int h){
+	  Pixel[][] pixels = this.getPixels2D();
+	  for(int r=y; r<y+h; r++){
+		  for(int c=x; c<x+w; c++){	
+			  Pixel pixelObj = pixels[r][c];
+			  int avgRed = ((
+			  		  pixels[r-1][c-1].getRed() 
+			  		+ pixels[r-1][c  ].getRed()
+			  		+ pixels[r-1][c+1].getRed()
+			  		+ pixels[r  ][c-1].getRed() 
+			  		+ pixels[r  ][c+1].getRed()
+			  		+ pixels[r+1][c-1].getRed()
+			  		+ pixels[r+1][c  ].getRed() 
+			  		+ pixels[r+1][c+1].getRed()
+			  		)/8);
+			  int avgGreen = ((
+			  		  pixels[r-1][c-1].getGreen() 
+			  		+ pixels[r-1][c  ].getGreen()
+			  		+ pixels[r-1][c+1].getGreen()
+			  		+ pixels[r  ][c-1].getGreen() 
+			  		+ pixels[r  ][c+1].getGreen()
+			  		+ pixels[r+1][c-1].getGreen()
+			  		+ pixels[r+1][c  ].getGreen() 
+			  		+ pixels[r+1][c+1].getGreen()
+			  		)/8);
+			  int avgBlue = ((
+			  		  pixels[r-1][c-1].getBlue() 
+			  		+ pixels[r-1][c  ].getBlue()
+			  		+ pixels[r-1][c+1].getBlue()
+			  		+ pixels[r  ][c-1].getBlue() 
+			  		+ pixels[r  ][c+1].getBlue()
+			  		+ pixels[r+1][c-1].getBlue()
+			  		+ pixels[r+1][c  ].getBlue() 
+			  		+ pixels[r+1][c+1].getBlue()
+			  		)/8);
+			  pixelObj.setRed(avgRed);
+			  pixelObj.setGreen(avgGreen);
+			  pixelObj.setBlue(avgBlue);
+		  }
+	  }
+ }
+ 
   public void copyPartial(Picture fromPic, int startRow, int startCol,
 			int fromRowStart, int fromColStart, int fromRowEnd, int fromColEnd)
 	{

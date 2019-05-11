@@ -26,7 +26,7 @@ public class Pong2 extends Canvas implements KeyListener, Runnable
 	{
 		//set up all variables related to the game
 		ball = new Ball(350, 250, 10, 10, Color.BLACK, 3, 3);
-		leftPaddle = new Paddle2(400, 400, 40, 40, Color.RED, 2);
+		leftPaddle = new Paddle2(400, 400, 40, 40, Color.BLUE, 2);
 		keys = new boolean[4];
 		tiles = new ArrayList<Tile>();
 		level = 1;
@@ -59,7 +59,7 @@ public class Pong2 extends Canvas implements KeyListener, Runnable
 			}
 		}
     
-    	setBackground(Color.WHITE);
+    	setBackground(Color.GRAY);
 		setVisible(true);
 		
 		new Thread(this).start();
@@ -91,7 +91,7 @@ public class Pong2 extends Canvas implements KeyListener, Runnable
 			tile.draw(graphToBack);
 		}
 		
-		graphToBack.setColor(Color.LIGHT_GRAY);
+		graphToBack.setColor(Color.GRAY);
 		graphToBack.setFont(new Font("Helvetica", Font.PLAIN, 50));
 		graphToBack.drawString(Integer.toString(level), 400, 360);
 		
@@ -101,10 +101,10 @@ public class Pong2 extends Canvas implements KeyListener, Runnable
 			ball.setXSpeed(0);
 			ball.setYSpeed(0);
 			level++;
-			graphToBack.setColor(Color.WHITE);
+			graphToBack.setColor(Color.GRAY);
 			graphToBack.fillRect(400, 290, 75, 75);
 			graphToBack.drawString(Integer.toString(level), 400, 360);
-			graphToBack.setColor(Color.WHITE);
+			graphToBack.setColor(Color.GRAY);
 			
 			//top tiles
 			for (int i = 5; i < 750; i += 85) {
@@ -138,7 +138,7 @@ public class Pong2 extends Canvas implements KeyListener, Runnable
 				tile.draw(graphToBack);
 			}
 			
-			graphToBack.setColor(Color.WHITE);
+			graphToBack.setColor(Color.GRAY);
 			graphToBack.fillRect(ball.getX(), ball.getY(), 10, 10);
 			ball = null;
 			ball = new Ball(350, 250, 10, 10, Color.GREEN, 3, 3);
@@ -189,7 +189,7 @@ public class Pong2 extends Canvas implements KeyListener, Runnable
 	
 		for (Tile tile : tiles) {
 			if (lCollide(tile) || rCollide(tile)) {
-				tile.draw(graphToBack, Color.WHITE);
+				tile.draw(graphToBack, Color.GRAY);
 				tiles.remove(tile);
 				ball.setXSpeed(-ball.getXSpeed());
 			}
@@ -197,7 +197,7 @@ public class Pong2 extends Canvas implements KeyListener, Runnable
 		
 		for (Tile tile : tiles) {
 			if (tCollide(tile) || bCollide(tile)) {
-				tile.draw(graphToBack, Color.WHITE);
+				tile.draw(graphToBack, Color.GRAY);
 				tiles.remove(tile);
 				ball.setYSpeed(-ball.getYSpeed());
 			}
@@ -304,7 +304,7 @@ public class Pong2 extends Canvas implements KeyListener, Runnable
    
    
    
-   //X AND Y ARE IN TOP LEFT AND DRAWS RIGHT AND DOWN!!!
+
    public boolean lCollide(Block n){
 	   if(ball.getX() + 2*ball.getXSpeed() >= n.getX() && ball.getX() < n.getX() + n.getWidth() /2 && ball.getY() >= n.getY() && ball.getY() <=  n.getY() + n.getHeight())
 			return true;

@@ -29,7 +29,7 @@ public class BreakOut2 extends Canvas implements KeyListener, Runnable
 
 	public BreakOut2()
 	{
-		System.out.println("Name: Jennie Cao \nPeriod: 4\nDate:4/3/18\nComputer Number:36");
+		System.out.println("");
 		//set up all variables related to the game
 		ball = new Ball(300, 20, 10, 10, Color.BLACK, 3, 3);		
 		paddle = new Paddle(700,300,30,100, Color.RED,5);

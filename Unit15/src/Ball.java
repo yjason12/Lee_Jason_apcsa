@@ -1,10 +1,3 @@
-
-//© A+ Computer Science  -  www.apluscompsci.com
-//Name -
-//Date -
-//Class -
-//Lab  -
-
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -15,137 +8,108 @@ public class Ball extends Block implements Collidable
 
 	public Ball()
 	{
-		super(200,200);
-		xSpeed = 3;
-		ySpeed = 1;
+		super(200, 200);
+		setSpeed(3, 1);
 	}
 
-	//add the other Ball constructors
-	public Ball(int xPos, int yPos){
-		super(xPos, yPos);
-		xSpeed = 3;
-		ySpeed = 1;
-	}
-	public Ball(int xPos, int yPos, int width, int height){
-		super(xPos, yPos, width, height);
-		xSpeed = 3;
-		ySpeed = 1;
-	}
-	public Ball(int xPos, int yPos, int width, int height, Color col){
-		super(xPos, yPos, width, height, col);
-		xSpeed=3;
-		ySpeed=1;
-	}
-	public Ball(int xPos, int yPos, int width, int height, Color col, int xspeed, int yspeed){
-		super(xPos, yPos, width, height, col);
-		xSpeed=xspeed;
-		ySpeed=yspeed;
-	}
-	public void setSpeed(int xspeed, int yspeed){
-		xSpeed = xspeed;
-		ySpeed = yspeed;
-	}
-	public void setXSpeed(int xspeed){
-		xSpeed = xspeed;
-	}
-	public void setYSpeed(int yspeed){
-		ySpeed = yspeed;
+	public Ball(int x, int y)
+	{
+		super(x, y);
+		setSpeed(3, 1);
 	}
 	
-
-	public boolean didCollideLeft(Object obj) {
-		Block testpaddle = (Block)obj;
-		if (getX()<=testpaddle.getX()+testpaddle.getWidth()+Math.abs(getXSpeed())&&getX()>=testpaddle.getX()+Math.abs(getXSpeed())&&
-				(getY()>=testpaddle.getY()-Math.abs(getYSpeed()) && getY()+getHeight()<=testpaddle.getY()+testpaddle.getHeight()+Math.abs(getYSpeed()))){
-			return true;
-		}
-		return false;
-	}
-
-
-	public boolean didCollideRight(Object obj) {
-
-		
-		Block testpaddle = (Block)obj;
-		if (getX()+getWidth()>=testpaddle.getX()-Math.abs(getXSpeed())&&getX()<=testpaddle.getX()+testpaddle.getWidth()-Math.abs(getXSpeed())&&(getY()>=testpaddle.getY()-Math.abs(getYSpeed()) 
-				&& getY()+getHeight()<=testpaddle.getY()+testpaddle.getHeight()+Math.abs(getYSpeed()))){
-			return true;
-		}
-		return false;
-	}
-
-
-	public boolean didCollideTop(Object obj) {
-
-		Block testpaddle = (Block)obj;
-		if ((getX()>=testpaddle.getX() && testpaddle.getX()+testpaddle.getWidth()>=getX()+getWidth())&&
-				getY()<=testpaddle.getY()+testpaddle.getHeight()+Math.abs(getYSpeed())&&getY()+getHeight()>=testpaddle.getY()+Math.abs(getYSpeed())){
-
-			return true;
-		}
-		return false;
-	}
-
-
-	public boolean didCollideBottom(Object obj) {
-
-		Block testpaddle = (Block) obj;
-		if ((getX()>=testpaddle.getX() && getX()+getWidth()<=testpaddle.getX()+testpaddle.getWidth())&&
-				getY()+getHeight()>=testpaddle.getY()-Math.abs(getYSpeed())&&getY()<=testpaddle.getY()+testpaddle.getHeight()-Math.abs(getYSpeed())){
-					return true;
-				}
-		return false;
+	public Ball(int x, int y, int wid, int ht)
+	{
+		this(x, y);
+		super.setWidth(wid);
+		super.setHeight(ht);
 	}
 	
+	public Ball(int x, int y, int wid, int ht, Color col)
+	{
+		this(x, y, wid, ht);
+		super.setColor(col);
+	}
 	
+	public Ball(int x, int y, int wid, int ht, int xS, int yS)
+	{
+		this(x, y, wid, ht);
+		setSpeed(xS, yS);
+	}
 	
+	public Ball(int x, int y, int wid, int ht, Color col, int xS, int yS)
+	{
+		super(x, y, wid, ht, col);
+		setSpeed(xS, yS);
+	}
 	
+	public void setXSpeed(int xS)
+	{
+		xSpeed = xS;
+	}
 	
+	public void setYSpeed(int yS)
+	{
+		ySpeed = yS;
+	}
 	
-	
-	
-	
-	
-	   
-   //add the set methods
-   
-
+	public void setSpeed(int xS, int yS)
+	{
+		setXSpeed(xS);
+		setYSpeed(yS);
+	}
+  
    public void moveAndDraw(Graphics window)
    {
-   	//draw a white ball at old ball location
-	   draw(window, Color.WHITE);
-
-      setX(getX()+xSpeed);
-		//setY
-      setY(getY()+ySpeed);
-
-		//draw the ball at its new location
-      draw(window);
+	   draw(window, Color.GRAY);
+	   setX(getX() + xSpeed);
+	   setY(getY() + ySpeed);
+	   draw(window);
    }
    
 	public boolean equals(Object obj)
 	{
-		if(getX()!=((Block) obj).getX()||getY()!=((Block) obj).getY()||getHeight()!=((Block) obj).getHeight()||getWidth()!=((Block) obj).getWidth()) return false;
-		if(!getColor().equals(((Block) obj).getColor())) return false;
-		if(getXSpeed()!=((Ball) obj).getXSpeed()) return false;
-		if(getYSpeed()!=((Ball) obj).getYSpeed()) return false;
-		return true;
-
-
-
+		Ball other = (Ball) obj;
+		return super.equals(other) && xSpeed == other.getXSpeed() && ySpeed == other.getYSpeed();
 	}   
 
-   //add the get methods
-	public int getXSpeed(){
+	//get methods
+	public int getXSpeed()
+	{
 		return xSpeed;
 	}
-	public int getYSpeed(){
+	
+	public int getYSpeed()
+	{
 		return ySpeed;
 	}
-   //add a toString() method
-	public String toString(){
-		String output = super.toString();
-		output = output + " "+ xSpeed + " " + ySpeed;
-		return output;
+	
+	public boolean didCollideLeft(Object obj)
+	{
+		Block other = (Block) obj;
+		return (getX() <= (other.getX() + other.getWidth() + Math.abs(getXSpeed())) && getX() > (other.getX() - getWidth() - Math.abs(getXSpeed())) && getX() >= (other.getX()) && getY() < (other.getY() + other.getHeight()) && (getY() + getHeight()) > other.getY());
+	}
+	
+	public boolean didCollideRight(Object obj)
+	{
+		Block other = (Block) obj;
+		return (getX() < (other.getX() + other.getWidth() + Math.abs(getXSpeed())) && getX() >= (other.getX() - getWidth() - Math.abs(getXSpeed())) && getX() <= other.getX() + other.getWidth() && getY() < (other.getY() + other.getHeight()) && (getY() + getHeight()) > other.getY());
+	}
+	
+	public boolean didCollideTop(Object obj)
+	{
+		Block other = (Block) obj;
+		return (getY() <= (other.getY() + other.getHeight() + Math.abs(getYSpeed())) && getY() > (other.getY() - getHeight() - Math.abs(getYSpeed())) && getY() <= (other.getY()) && getX() < (other.getX() + other.getWidth()) && (getX() + getWidth()) > other.getX());
+	}
+	
+	public boolean didCollideBottom(Object obj)
+	{
+		Block other = (Block) obj;
+		return (getY() > (other.getY() - getHeight() - Math.abs(getYSpeed())) && getY() <= (other.getY() + other.getHeight() + Math.abs(getYSpeed()))  && (getY() >= other.getY() && getX() < (other.getX() + other.getWidth()) && (getX() + getWidth()) > other.getX() && (getX() + getWidth()) < other.getX() + other.getWidth()));
+	}
+	
+	public String toString()
+	{
+		return super.toString() + " " + xSpeed + " " + ySpeed;
 	}
 }

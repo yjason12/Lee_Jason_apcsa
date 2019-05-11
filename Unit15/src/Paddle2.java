@@ -50,7 +50,7 @@ public class Paddle2 extends Block
 
    public void moveUpAndDraw(Graphics window)
    {
-	   draw(window, Color.WHITE);
+	   draw(window, Color.GRAY);
 	   this.setY(this.getY()-getSpeed());
 	   draw(window);
 
@@ -58,7 +58,7 @@ public class Paddle2 extends Block
 
    public void moveDownAndDraw(Graphics window)
    {
-	   draw(window, Color.WHITE);
+	   draw(window, Color.GRAY);
 	   this.setY(this.getY()+getSpeed());
 	   draw(window);
 
@@ -66,7 +66,7 @@ public class Paddle2 extends Block
    
    public void moveLeftAndDraw(Graphics window)
    {
-	   draw(window, Color.WHITE);
+	   draw(window, Color.GRAY);
 	   this.setX(this.getX()-getSpeed());
 	   draw(window);
 
@@ -74,7 +74,7 @@ public class Paddle2 extends Block
 
    public void moveRightAndDraw(Graphics window)
    {
-	   draw(window, Color.WHITE);
+	   draw(window, Color.GRAY);
 	   this.setX(this.getX()+getSpeed());
 	   draw(window);
 

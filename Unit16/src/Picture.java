@@ -482,6 +482,82 @@ public class Picture extends SimplePicture
   }
   
   
+  public void encode(Picture messageImage) {
+	  Pixel[][] pixels=this.getPixels2D();
+	  Pixel[][] messagePixels = messageImage.getPixels2D();
+	  
+	  
+	  int tempVal=0;
+	  int counter = 0;
+	  
+	  Pixel currPixel = null;
+	  Pixel messagePixel = null;
+	  
+	  
+	  
+	  for(int row = 0; row< this.getHeight(); row++ ) {
+		 for(int col = 0; col<this.getWidth(); col++) {
+			 currPixel = pixels[row][col];
+			 tempVal = currPixel.getBlue()%10;
+			 currPixel.setBlue(currPixel.getBlue()-tempVal + counter);
+			 counter++;
+			 if(counter==7) {
+				 counter = 0;
+			 }
+			 messagePixel = messagePixels[row][col];
+			 
+			 if (messagePixel.colorDistance(Color.BLACK)<50) {
+				 currPixel.setBlue(currPixel.getBlue() +1);
+			 }
+			 
+			 
+			 
+		 }
+		  
+	  }
+	  
+	  
+  }
+  
+  public void decode() {
+	   Pixel[][]pixels = this.getPixels2D();
+	   
+	   int height = this.getHeight();
+	   int width = this.getWidth();
+	   int tempVal = 0;
+	   
+	 
+	   
+
+	   
+	   
+//	   for(int row = 0; row<this.getHeight(); row++) {
+//		   for(int col = 0; col<this.getWidth(); col++) {
+//			   pixels[row][col].setColor(Color.WHITE);
+			   
+//		   }
+//	   }
+	   
+	  
+	   for(int row = 0; row<this.getHeight(); row++) {
+		   for(int col = 0; col<this.getWidth(); col++) {
+			   if(pixels[row][col].getBlue()%10!=tempVal) {
+				   pixels[row][col].setColor(Color.BLACK);
+			   }
+			   else {
+				  pixels[row][col].setColor(Color.WHITE); 
+			   }
+			   tempVal++;
+			   if(tempVal ==7) {
+				   tempVal=0;
+			   }
+			 
+			   
+		   }
+	   }
+	   
+  }
+  
   
   /* Main method for testing - each class in Java can have a main 
    * method 

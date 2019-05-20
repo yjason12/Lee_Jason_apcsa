@@ -137,6 +137,18 @@ public class PictureTester
     swan.edgeDetection(10);
     swan.explore();
   }
+  public static void testEncode(Picture encodeImage, Picture msgImage) {
+	   
+	    encodeImage.explore();
+	    encodeImage.encode(msgImage);
+	    encodeImage.explore();
+  }
+  
+  public static void testDecode(Picture decodeImage) {
+	 decodeImage.explore();
+	 decodeImage.decode();
+	 decodeImage.explore();
+  }
   
   
   /** Main method for testing.  Every class can have a main
@@ -160,6 +172,12 @@ public class PictureTester
     //testMirrorTemple();
     //testMirrorArms();
     //testMirrorGull();
+	  Picture beach = new Picture("C:\\Users\\0yong\\Documents\\GitHub\\Lee_Jason_apcsa-p33\\Unit16\\src\\images\\beach.jpg");
+	  Picture msg = new Picture("C:\\\\Users\\\\0yong\\\\Documents\\\\GitHub\\\\Lee_Jason_apcsa-p33\\\\Unit16\\\\src\\\\images\\\\msg.jpg");
+	  Picture apple = new Picture("C:\\\\Users\\\\0yong\\\\Documents\\\\GitHub\\\\Lee_Jason_apcsa-p33\\\\Unit16\\\\src\\\\images\\\\apple.jpg");
+	  testEncode(beach,apple);
+	  testDecode(beach);
+	
 	// 
     //testMirrorDiagonal();
   //testCollage();

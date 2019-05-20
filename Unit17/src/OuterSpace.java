@@ -68,7 +68,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		if(doesCollide || hitsBottom) {
 				graphToBack.setColor(Color.RED);
 				graphToBack.setFont(new Font("Serif",Font.BOLD,30));
-				graphToBack.drawString("You Lost.", 320, 300);
+				graphToBack.drawString("You Lost!", 320, 300);
 				twoDGraph.drawImage(back, null, 0, 0);
 				
 				return;
